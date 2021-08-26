@@ -10,7 +10,7 @@ use IEEE.std_logic_1164.all;
 
 entity Entrega_1 is
 	generic (
-		quant_steps : integer := 10e5
+		quant_steps : integer := 1000
 	);
 
 	port (
@@ -93,7 +93,7 @@ architecture rtl of Entrega_1 is
 						has_finished_steps := 1;
 					end if;
 				end if;
-			end process;
+		end process;
 
 			
 			
@@ -114,18 +114,14 @@ architecture rtl of Entrega_1 is
 		end process;
 
 
-
-
-
 		topCounter <= 20e4 when vel = "00" else
-						  30e4 when vel = "01" else
-						  50e4 when vel = "10" else
-						  70e4 when vel = "11" else
-						  10e4;
-		
-		
+					  30e4 when vel = "01" else
+					  50e4 when vel = "10" else
+					  70e4 when vel = "11" else
+					  10e4;
 
-		vel_counter: process(clk)
+
+		vel_counter: process( clk )
 			variable counter : integer range 0 to 50e6 := 0;
 			variable reducer : integer range 0 to 50e6 := 0;
 			variable old_vel : std_logic_vector(1 downto 0) := "00";
